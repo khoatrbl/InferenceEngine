@@ -57,12 +57,12 @@ public class TruthTable {
     }
 
     private static Boolean evaluateClause(String clause, Map<String, Boolean> model) {
-        if (clause.contains("<=>")) {
-            String[] parts = clause.split("<=>");
-            boolean leftValue = evaluateExpression(parts[0].trim(), model);
-            boolean rightValue = evaluateExpression(parts[1].trim(), model);
-            return leftValue == rightValue;
-        }
+//        if (clause.contains("<=>")) {
+//            String[] parts = clause.split("<=>");
+//            boolean leftValue = evaluateExpression(parts[0].trim(), model);
+//            boolean rightValue = evaluateExpression(parts[1].trim(), model);
+//            return leftValue == rightValue;
+//        }
 
         if (clause.contains("=>")) {
             String[] parts = clause.split("=>");
@@ -116,7 +116,7 @@ public class TruthTable {
     private static Boolean evaluateLiteral(String literal, Map<String, Boolean> model) {
         if (literal.startsWith("~")) {
             String prop = literal.substring(1); // Remove negation (~)
-            return model.containsKey(prop) ? !model.get(prop) : null;
+            return model.containsKey(prop) ? !model.get(prop) : false;
         } else {
             return model.getOrDefault(literal, null);
         }

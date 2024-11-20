@@ -13,11 +13,11 @@ public class Main {
 //        String filename = args[0];
 //        String method = args[1].toUpperCase();
 
-
-        String filename = "src/main/java/me/discordbot/test10_horn.txt";
+//        String filename = "src/main/java/me/discordbot/test_HornKB.txt";
+        String filename = "src/main/java/me/discordbot/test13_horn.txt";
 //        String filename = "src/main/java/me/discordbot/test_genericKB.txt";
 //        String filename = "src/main/java/me/discordbot/test_genericKB_1.txt";
-        String method = "BC";
+        String method = "TT";
 
         String query = null;
         switch (method) {
