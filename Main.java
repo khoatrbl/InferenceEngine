@@ -14,10 +14,10 @@ public class Main {
 //        String method = args[1].toUpperCase();
 
 
-        String filename = "src/main/java/me/discordbot/test2_horn.txt";
+        String filename = "src/main/java/me/discordbot/test1_horn.txt";
 //        String filename = "src/main/java/me/discordbot/test_genericKB.txt";
 //        String filename = "src/main/java/me/discordbot/test_genericKB_1.txt";
-        String method = "TT";
+        String method = "FC";
 
         String query = null;
         switch (method) {
@@ -34,9 +34,10 @@ public class Main {
                 break;
             case "FC":
                 Map<String, Object> fcData = InferenceEngine.parseInputForChainingAlgorithm(filename);
-//                for (String key : fcData.keySet()) {
-//                    System.out.println("Key [" + key + "]: " + fcData.get(key).toString());
-//                }
+                for (String key : fcData.keySet()) {
+                    System.out.println("Key [" + key + "]: " + fcData.get(key).toString());
+                }
+                System.out.println("---------------------");
 
                 Set<String> factsFC = (Set<String>) fcData.get("facts");
                 List<Rule> rulesFC = (List<Rule>) fcData.get("rules");

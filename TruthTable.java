@@ -8,14 +8,18 @@ public class TruthTable {
         Set<String> symbols = extractPropositions(kb);
         List<Map<String, Boolean>> models = generateModels(symbols);
 
-        int count = 0;
+        int countModel = 0; // number of models where kb is true
+        int count = 0; // number of models where kb is true and query is also true
         for (Map<String, Boolean> model : models) {
-            if (isKBTrue(kb, model) && model.getOrDefault(query, false)) {
-                count++;
+            if (isKBTrue(kb, model)) {
+                countModel++;
+               if (model.getOrDefault(query, false)) {
+                    count++;
+               }
             }
         }
-
-        return count > 0 ? "YES: " + count : "NO";
+        // countModel == count means in all models where KB is true, we also have query is true
+        return countModel == count ? "YES: " + count : "NO";
     }
 
     private static Set<String> extractPropositions(List<String> kb) {
