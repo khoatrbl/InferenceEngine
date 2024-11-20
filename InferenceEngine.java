@@ -28,6 +28,29 @@ public class InferenceEngine {
         return parsedData;
     }
 
+    public static boolean isHornKB(List<String> kb) {
+        for (String clause : kb) {
+            // Split clause into literals
+            String[] literals = clause.replace("=>", "||").split("\\|\\|");
+            int positiveCount = 0;
+
+            for (String literal : literals) {
+                literal = literal.trim();
+                // Count positive literals (those not starting with ~)
+                if (!literal.startsWith("~")) {
+                    positiveCount++;
+                }
+            }
+
+            // If a clause has more than one positive literal, it is not Horn form
+            if (positiveCount > 1) {
+                return false;
+            }
+        }
+        // If all clauses satisfy the Horn form condition
+        return true;
+    }
+
     public static Map<String, Object> parseInputForChainingAlgorithm(String filename) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(filename));
         List<String> lines = new ArrayList<>();

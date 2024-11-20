@@ -14,9 +14,10 @@ public class Main {
 //        String method = args[1].toUpperCase();
 
 //        String filename = "src/main/java/me/discordbot/test_HornKB.txt";
-        String filename = "src/main/java/me/discordbot/test13_horn.txt";
+//        String filename = "src/main/java/me/discordbot/test14_horn.txt";
 //        String filename = "src/main/java/me/discordbot/test_genericKB.txt";
 //        String filename = "src/main/java/me/discordbot/test_genericKB_1.txt";
+        String filename = "src/main/java/me/discordbot/test1_genericKB.txt";
         String method = "TT";
 
         String query = null;
@@ -30,6 +31,10 @@ public class Main {
                 System.out.println(query);
                 System.out.println("---------------------");
 
+//                if (InferenceEngine.isHornKB(kb)) {
+//
+//                    break;
+//                }
                 System.out.println(TruthTable.evaluateTT(kb, query));
                 break;
             case "FC":

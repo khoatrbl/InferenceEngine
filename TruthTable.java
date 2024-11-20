@@ -57,12 +57,12 @@ public class TruthTable {
     }
 
     private static Boolean evaluateClause(String clause, Map<String, Boolean> model) {
-//        if (clause.contains("<=>")) {
-//            String[] parts = clause.split("<=>");
-//            boolean leftValue = evaluateExpression(parts[0].trim(), model);
-//            boolean rightValue = evaluateExpression(parts[1].trim(), model);
-//            return leftValue == rightValue;
-//        }
+        if (clause.contains("<=>")) {
+            String[] parts = clause.split("<=>");
+            boolean leftValue = evaluateExpression(parts[0].trim(), model);
+            boolean rightValue = evaluateExpression(parts[1].trim(), model);
+            return leftValue == rightValue;
+        }
 
         if (clause.contains("=>")) {
             String[] parts = clause.split("=>");
@@ -72,9 +72,9 @@ public class TruthTable {
             Boolean premiseValue = evaluateExpression(premise, model);
             Boolean conclusionValue = conclusion == null || evaluateExpression(conclusion, model);
 
-            if (premiseValue == null || conclusionValue == null) {
-                return null; // If any part is unknown, the clause is undecidable
-            }
+//            if (premiseValue == null || conclusionValue == null) {
+//                return null; // If any part is unknown, the clause is undecidable
+//            }
 
             return !premiseValue || conclusionValue;
         }
@@ -86,9 +86,9 @@ public class TruthTable {
             String[] parts = expression.split("&");
             for (String part : parts) {
                 Boolean value = evaluateLiteral(part.trim(), model);
-                if (value == null) {
-                    return null;
-                }
+//                if (value == null) {
+//                    return null;
+//                }
                 if (!value) {
                     return false;
                 }
@@ -99,9 +99,9 @@ public class TruthTable {
             String[] parts = expression.split("\\|\\|");
             for (String part : parts) {
                 Boolean value = evaluateLiteral(part.trim(), model);
-                if (value == null) {
-                    return null;
-                }
+//                if (value == null) {
+//                    return null;
+//                }
                 if (value) {
                     return true; // OR: If any part is true, the expression is true
                 }
@@ -118,7 +118,7 @@ public class TruthTable {
             String prop = literal.substring(1); // Remove negation (~)
             return model.containsKey(prop) ? !model.get(prop) : false;
         } else {
-            return model.getOrDefault(literal, null);
+            return model.getOrDefault(literal, false);
         }
     }
 }
