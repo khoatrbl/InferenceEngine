@@ -53,10 +53,17 @@ public class InferenceEngine {
                 clause = clause.trim();
                 if (clause.contains("=>")) {
                     String[] parts = clause.split("=>");
+
                     List<String> premises = Arrays.asList(parts[0].trim().split("&"));
+                    List<String> sanitizedPremises = new ArrayList<>();
+
+                    for (String premise : premises) {
+                        String sanitizedPremise = premise.trim();
+                        sanitizedPremises.add(sanitizedPremise);
+                    }
 
                     String conclusion = parts[1].trim();
-                    rules.add(new Rule(premises, conclusion));
+                    rules.add(new Rule(sanitizedPremises, conclusion));
                 } else if (!clause.isEmpty()) {
                     facts.add(clause);
                 }

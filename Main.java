@@ -14,10 +14,10 @@ public class Main {
 //        String method = args[1].toUpperCase();
 
 
-        String filename = "src/main/java/me/discordbot/test1_horn.txt";
+        String filename = "src/main/java/me/discordbot/test10_horn.txt";
 //        String filename = "src/main/java/me/discordbot/test_genericKB.txt";
 //        String filename = "src/main/java/me/discordbot/test_genericKB_1.txt";
-        String method = "FC";
+        String method = "BC";
 
         String query = null;
         switch (method) {

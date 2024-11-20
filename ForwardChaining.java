@@ -29,7 +29,7 @@ public class ForwardChaining {
         } while (newFactInferred);
 
         // If no new facts can be inferred and the query is not inferred
-        return facts.contains(query) ? "YES: " + inferred: "NO";
+        return facts.contains(query) ? "YES: " + inferred : "NO";
     }
 
 }
