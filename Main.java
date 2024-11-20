@@ -50,7 +50,7 @@ public class Main {
 
                 Set<String> factsBC = (Set<String>) bcData.get("facts");
                 List<Rule> rulesBC = (List<Rule>) bcData.get("rules");
-//                query = (String) bcData.get("query");
+                query = (String) bcData.get("query");
 //
 //                                for (String key : bcData.keySet()) {
 //                    System.out.println("Key [" + key + "]: " + bcData.get(key).toString());
