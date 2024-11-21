@@ -3,7 +3,13 @@ package me.discordbot;
 import java.util.*;
 
 public class ForwardChaining {
-    // Forward Chaining Algorithm
+    /** Using Forward Chaining algorithm, this method returns "YES",
+     * followed by the list of propositional symbols entailed from KB that has been
+     * found during the execution of the FC algorithm.
+     * @param facts : A set of string that contains all the fact obtained from the input.
+     * @param rules : A list of Rules obtained from the input file.
+     * @param query : The query needed for evaluation of entailment.
+     * @return a string that indicates if query is entailed by KB with YES and NO*/
     public static String evaluateFC(Set<String> facts, List<Rule> rules, String query) {
         Set<String> inferred = new HashSet<>(facts);
         boolean newFactInferred;

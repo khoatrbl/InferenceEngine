@@ -28,29 +28,6 @@ public class InferenceEngine {
         return parsedData;
     }
 
-    public static boolean isHornKB(List<String> kb) {
-        for (String clause : kb) {
-            // Split clause into literals
-            String[] literals = clause.replace("=>", "||").split("\\|\\|");
-            int positiveCount = 0;
-
-            for (String literal : literals) {
-                literal = literal.trim();
-                // Count positive literals (those not starting with ~)
-                if (!literal.startsWith("~")) {
-                    positiveCount++;
-                }
-            }
-
-            // If a clause has more than one positive literal, it is not Horn form
-            if (positiveCount > 1) {
-                return false;
-            }
-        }
-        // If all clauses satisfy the Horn form condition
-        return true;
-    }
-
     public static Map<String, Object> parseInputForChainingAlgorithm(String filename) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(filename));
         List<String> lines = new ArrayList<>();
@@ -99,46 +76,5 @@ public class InferenceEngine {
         parsedData.put("rules", rules);
         parsedData.put("query", ask);
         return parsedData;
-    }
-
-    public static List<String> convertToHornForm(List<String> kb) {
-        List<String> hornClauses = new ArrayList<>();
-
-        for (String clause : kb) {
-            // Normalize clause (e.g., split into literals)
-            String[] literals = clause.split("\\|"); // Split by OR
-            List<String> positiveLiterals = new ArrayList<>();
-            List<String> negativeLiterals = new ArrayList<>();
-
-            for (String literal : literals) {
-                literal = literal.trim();
-                if (literal.startsWith("~")) {
-                    negativeLiterals.add(literal.substring(1)); // Remove ~ for premises
-                } else {
-                    positiveLiterals.add(literal); // Positive literals
-                }
-            }
-
-            // Handle Horn clause conditions
-            if (positiveLiterals.size() > 1) {
-                // Not Horn form: Multiple positive literals, discard
-                System.out.println("Non-Horn clause discarded: " + clause);
-                continue;
-            } else if (positiveLiterals.size() == 1) {
-                // Single positive literal: Convert to implication
-                String conclusion = positiveLiterals.get(0);
-                String premises = String.join(" & ", negativeLiterals);
-                if (premises.isEmpty()) {
-                    hornClauses.add(conclusion); // Fact
-                } else {
-                    hornClauses.add(premises + " => " + conclusion); // Implication
-                }
-            } else {
-                // No positive literals: Goal clause
-                hornClauses.add(String.join(" & ", negativeLiterals));
-            }
-        }
-
-        return hornClauses;
     }
 }

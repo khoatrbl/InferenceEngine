@@ -4,21 +4,22 @@ import java.io.IOException;
 import java.util.*;
 
 public class Main {
+    @SuppressWarnings("unchecked")
     public static void main(String[] args) throws IOException {
-//        if (args.length < 2) {
-//            System.out.println("Usage: java Main <filename> <method>");
-//            return;
-//        }
-//
-//        String filename = args[0];
-//        String method = args[1].toUpperCase();
+        if (args.length < 2) {
+            System.out.println("Usage: java Main <filename> <method>");
+            return;
+        }
+
+        String filename = args[0];
+        String method = args[1].toUpperCase();
 
 //        String filename = "src/main/java/me/discordbot/test_HornKB.txt";
 //        String filename = "src/main/java/me/discordbot/test14_horn.txt";
 //        String filename = "src/main/java/me/discordbot/test_genericKB.txt";
 //        String filename = "src/main/java/me/discordbot/test_genericKB_1.txt";
-        String filename = "src/main/java/me/discordbot/test1_genericKB.txt";
-        String method = "TT";
+//        String filename = "src/main/java/me/discordbot/test1_genericKB.txt";
+//        String method = "TT";
 
         String query = null;
         switch (method) {
@@ -31,10 +32,6 @@ public class Main {
                 System.out.println(query);
                 System.out.println("---------------------");
 
-//                if (InferenceEngine.isHornKB(kb)) {
-//
-//                    break;
-//                }
                 System.out.println(TruthTable.evaluateTT(kb, query));
                 break;
             case "FC":
@@ -45,7 +42,7 @@ public class Main {
                 System.out.println("---------------------");
 
                 Set<String> factsFC = (Set<String>) fcData.get("facts");
-                List<Rule> rulesFC = (List<Rule>) fcData.get("rules");
+                List<Rule> rulesFC =  (List<Rule>) fcData.get("rules");
                 query = (String) fcData.get("query");
 
                 System.out.println(ForwardChaining.evaluateFC(factsFC, rulesFC, query));
@@ -56,10 +53,10 @@ public class Main {
                 Set<String> factsBC = (Set<String>) bcData.get("facts");
                 List<Rule> rulesBC = (List<Rule>) bcData.get("rules");
                 query = (String) bcData.get("query");
-//
-//                                for (String key : bcData.keySet()) {
-//                    System.out.println("Key [" + key + "]: " + bcData.get(key).toString());
-//                }
+
+                for (String key : bcData.keySet()) {
+                    System.out.println("Key [" + key + "]: " + bcData.get(key).toString());
+                }
 
                 System.out.println(BackwardChaining.evaluateBC(factsBC, rulesBC, new HashSet<>(), query));
                 break;
