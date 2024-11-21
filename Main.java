@@ -6,20 +6,20 @@ import java.util.*;
 public class Main {
     @SuppressWarnings("unchecked")
     public static void main(String[] args) throws IOException {
-        if (args.length < 2) {
-            System.out.println("Usage: java Main <filename> <method>");
-            return;
-        }
-
-        String filename = args[0];
-        String method = args[1].toUpperCase();
+//        if (args.length < 2) {
+//            System.out.println("Usage: java Main <filename> <method>");
+//            return;
+//        }
+//
+//        String filename = args[0];
+//        String method = args[1].toUpperCase();
 
 //        String filename = "src/main/java/me/discordbot/test_HornKB.txt";
 //        String filename = "src/main/java/me/discordbot/test14_horn.txt";
-//        String filename = "src/main/java/me/discordbot/test_genericKB.txt";
+        String filename = "src/main/java/me/discordbot/test_genericKB.txt";
 //        String filename = "src/main/java/me/discordbot/test_genericKB_1.txt";
 //        String filename = "src/main/java/me/discordbot/test1_genericKB.txt";
-//        String method = "TT";
+        String method = "RES";
 
         String query = null;
         switch (method) {
@@ -59,6 +59,23 @@ public class Main {
                 }
 
                 System.out.println(BackwardChaining.evaluateBC(factsBC, rulesBC, new HashSet<>(), query));
+                break;
+            case "RES":
+                Map<String, String> parsedData = InferenceEngine.parseInput(filename);
+                List<String> generalKb = Arrays.asList(parsedData.get("KB").split(";"));
+                query = parsedData.get("query");
+
+                List<CNFConverter.Expression> resKb = new ArrayList<>();
+
+                for (String exp : generalKb) {
+                    CNFConverter.Expression expression = CNFConverter.parseExpression(exp.trim());
+                    CNFConverter.Expression convertedExpression = CNFConverter.toCNF(expression);
+
+                    System.out.println(CNFConverter.printExpression(convertedExpression));
+                    resKb.add(convertedExpression);
+                }
+
+                System.out.println(resKb);
                 break;
             default:
                 System.out.println("Invalid method. Use TT, FC, or BC.");
